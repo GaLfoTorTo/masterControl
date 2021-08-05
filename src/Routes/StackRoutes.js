@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import TabRoutes from './TabRoutes';
 import Login from '../Pages/Login/Login';
+import Vizualizar from '../Pages/Vizualizar/Vizualizar';
+import Novo from '../Pages/Novo/Novo';
+import NovoPaciente from '../Pages/NovoPaciente/NovoPaciente';
 
 const Stack = createStackNavigator();
 
@@ -18,18 +22,26 @@ const StackRoutes = ({ navigation }) => {
                     }}
                 />
                 <Stack.Screen
-                    name='Home'
-                    component={TabRoutes}
+                    name='NovoPaciente'
+                    component={NovoPaciente}
                     options={{
-                        headerShown: false
+                        title: false
                     }}
                 />
                 <Stack.Screen
-                    name='Lista'
-                    component={Lista}
+                    name='Home'
+                    component={TabRoutes}
                     options={{
-                        headerShown: false
+                        title: false
                     }}
+                />
+                <Stack.Screen
+                    name='Novo'
+                    component={Novo}
+                />
+                <Stack.Screen
+                    name='Vizualizar'
+                    component={Vizualizar}
                 />
             </Stack.Navigator>
         </NavigationContainer>
