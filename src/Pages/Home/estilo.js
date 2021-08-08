@@ -72,8 +72,7 @@ const estilo = StyleSheet.create({
         height: 150,
         marginVertical: 5,
         padding: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgb(200, 200 ,200)'
+        backgroundColor: Colors.infoLight
     },
     dadosAgendamento:{
         alignItems: 'flex-start',

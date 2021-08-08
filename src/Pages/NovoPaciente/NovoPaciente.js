@@ -11,17 +11,19 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import {useFormik} from 'formik';
 import estilo from './estilo';
+import Cadastrar from '../../Api/Cadastrar';
 
 const NovoPaciente = ({navigation}) => {
     const [ready, setReady] = useState(false);
+    const [mensagem, setMensagem] = useState('');
 
     const salvar = () => {
-        console.warn(values)
+        Cadastrar(setMensagem, 'pacientes',values)
     }
     const {handleChange, handleBlur, handleSubmit, values} = useFormik({
         initialValues:{
             id:'', nome:'', email:'', senha:'',
-            data_nascimento:'', telefone:'', cpf:'', rg:'',
+            data_nascimento:'', telefone:'',sexo: '', cpf:'', rg:'',
             cep:'', logradouro:'', numero:'', bairro:'',
             cidade:'', uf:''
         },
@@ -32,16 +34,19 @@ const NovoPaciente = ({navigation}) => {
         navigation.setOptions({headerShown: false})
         return( 
             <View style={estilo.check}>
-                <Text style={estilo.mensagem}>Pronto, seu cadastro foi realizado com sucesso!</Text>
+                <Text style={estilo.mensagem}>{mensagem == undefined ? 'Não foi possivel salvar!': mensagem}</Text>
                 <LottieView
-                    source={require('../../../assets/checkAnimation.json')}
+                    source={mensagem == undefined ? require('../../../assets/errorAnimation.json') : require('../../../assets/checkAnimation.json')}
                     autoPlay
                     loop={false}
                     onAnimationFinish={() => {
+                        mensagem == undefined ?
                         navigation.reset({
                             index: 0,
                             routes: [{ name: 'Login' }]
                         })
+                        :
+                        navigation.goBack()  
                     }}
                     style={estilo.load}
                 />
@@ -103,6 +108,23 @@ const NovoPaciente = ({navigation}) => {
                                 onBlur={handleBlur('data_nascimento')}
                                 value={values.data_nascimento}
                             />
+                        </View>
+                    </View>
+                    <View style={estilo.row}>
+                        <View style={estilo.col}>
+                            <View style={estilo.input}>
+                                <RNPickerSelect
+                                    placeholder={values.sexo == "" ? { label: 'Selecione...', value: '' } : { label: values.sexo, value: values.sexo }}
+                                    onValueChange={handleChange('sexo')}
+                                    value={values.sexo}
+                                    items={[
+                                        { label: 'Masculino', value: 'Masculino' },
+                                        { label: 'Feminino', value: 'Feminino' },
+                                        { label: 'Outros', value: 'Outros' }
+                                    ]}
+                                    useNativeAndroidPickerStyle={false}
+                                />
+                            </View>
                         </View>
                     </View>
                     <View style={estilo.row}>

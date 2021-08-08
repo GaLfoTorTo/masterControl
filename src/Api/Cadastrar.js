@@ -8,7 +8,7 @@ const Cadastrar = async (callback, link, values) => {
             return response.data.success
         })
         .catch(function (error) {
-            return 'Não foi possivel salvar!'
+            return undefined
         });
     callback(responseHTTP);
 }

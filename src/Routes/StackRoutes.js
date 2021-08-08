@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabRoutes from './TabRoutes';
 import Login from '../Pages/Login/Login';
-import Vizualizar from '../Pages/Vizualizar/Vizualizar';
+import Visualizar from '../Pages/Visualizar/Visualizar';
 import Novo from '../Pages/Novo/Novo';
 import NovoPaciente from '../Pages/NovoPaciente/NovoPaciente';
 
@@ -40,8 +40,8 @@ const StackRoutes = ({ navigation }) => {
                     component={Novo}
                 />
                 <Stack.Screen
-                    name='Vizualizar'
-                    component={Vizualizar}
+                    name='Visualizar'
+                    component={Visualizar}
                 />
             </Stack.Navigator>
         </NavigationContainer>

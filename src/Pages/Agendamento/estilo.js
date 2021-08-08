@@ -51,7 +51,7 @@ const estilo = StyleSheet.create({
     div: {
         height: 1,
         width: '100%',
-        backgroundColor: 'rgb(200, 200, 200)',
+        backgroundColor: Colors.secondaryLight,
     },
     botoes:{
         width: '100%',
@@ -70,10 +70,18 @@ const estilo = StyleSheet.create({
     },
     textoAtivo: {
         fontSize: 18,
-        color: 'rgb(25, 138, 84)',
+        color: 'rgb(25, 90, 30)',
+    },
+    ativoCancelado:{
+        fontSize: 18,
+        color: 'rgb(150, 20,5)'
     },
     botaoAtivo: {
-        backgroundColor: 'rgba(25, 190, 84, 0.5)',
+        backgroundColor: Colors.successLight,
+        borderRadius: 10
+    },
+    botaoAtivoCancelado:{
+        backgroundColor: Colors.dangerLight,
         borderRadius: 10
     },
     cardAgendamento: {
@@ -100,14 +108,25 @@ const estilo = StyleSheet.create({
     dado:{
         color: Colors.secondary,
     },
+    dadoCancelado: {
+        color: Colors.ligth,
+    },
     concluidos:{
-        backgroundColor: 'rgba(25, 190, 84, 0.5)',
+        backgroundColor: Colors.successLight,
     },
     cancelados:{
-        backgroundColor: 'rgba(255, 0, 34, 0.5)',
+        backgroundColor: Colors.dangerLight,
     },
     dadosCancelado: {
         color: Colors.light
+    },
+    iconConcluido:{
+        color: 'rgba(25, 90, 30, 0.3)',
+        marginRight: 10
+    },
+    iconCancelado:{
+        color: 'rgba(150, 20, 5, 0.3)',
+        marginRight: 10
     }
 });
 export default estilo;

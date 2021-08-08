@@ -69,13 +69,13 @@ const Home = ({navigation}) => {
                     <Text style={estilo.tituloCard}>Meus Agendamentos:</Text>
                     <View style={estilo.div}></View>
                     <FlatList 
-                        data={['1','1','1','1','1','1']}
+                        data={[{ paciente: 'teste', status: 'Marcado' }, { paciente: 'teste2', status: 'Marcado' }, { paciente: 'teste3', status: 'Marcado' },'1','1','1']}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({item, index}) => {
                             return(
                                 <TouchableOpacity 
                                     style={estilo.itemAgendamento}
-                                    onPress={() => navigation.navigate('Vizualizar', {item})}
+                                    onPress={() => navigation.navigate('Visualizar', {item})}
                                 >
                                     <View style={estilo.dadosAgendamento}>
                                         <View style={estilo.campo}>
