@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-//harpia.digitalise.dev
-const api = axios.create({
+const Api = axios.create({
     baseURL: 'http://192.168.15.76:8000/api/',
     headers: {
         'Access-Control-Allow-Origin': '*',
@@ -11,4 +10,4 @@ const api = axios.create({
     }
 });
 
-export default api;  
+export default Api;  

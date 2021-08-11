@@ -11,7 +11,10 @@ import {
 import { RectButton } from 'react-native-gesture-handler';
 import estilo from './estilo';
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+
+    const user = route.params;
+    console.warn(user);
     return (
         <SafeAreaView style={estilo.container}>
             <View style={estilo.header}>

@@ -6,8 +6,7 @@ const estilo = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        backgroundColor: Colors.success//'rgb(240, 240, 240)',
-        ///padding: 10
+        backgroundColor: Colors.success
     },
     cardLogo:{
         flex: 0.5,
@@ -21,7 +20,7 @@ const estilo = StyleSheet.create({
         position: 'relative',
         bottom: 10,
         width: '90%',
-        backgroundColor: 'rgba(255, 0,0,0.4)',
+        backgroundColor: Colors.danger,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
@@ -29,7 +28,7 @@ const estilo = StyleSheet.create({
         flexDirection: 'row'
     },
     textMessage: {
-        color: Colors.danger,
+        color: Colors.ligth,
         textAlign: 'center',
         flex: 0.9
     },
@@ -41,7 +40,12 @@ const estilo = StyleSheet.create({
         alignItems: 'center',
         borderTopLeftRadius: 70,
         borderTopRightRadius: 70,
-        paddingVertical: 15
+        paddingVertical: 15,
+    },
+    tecladoOpen: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingTop: 30
     },
     input: {
         backgroundColor: 'rgb(230, 230, 240)',
@@ -80,7 +84,13 @@ const estilo = StyleSheet.create({
         alignItems: 'center',
     },
     botaoSenha: {
-        backgroundColor: Colors.danger /* 'rgb(255, 150, 0 )' */
+        backgroundColor: Colors.danger
+    },
+    load:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
     }
 })
 

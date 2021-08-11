@@ -53,6 +53,9 @@ const estilo = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold'
     },
+    cardLabel:{
+        flexDirection: 'row'
+    },
     input: {
         padding: 5,
         paddingLeft: 10,
@@ -62,6 +65,18 @@ const estilo = StyleSheet.create({
     },
     inputDate: {
         padding: 9,
+    },
+    obs:{
+        color: Colors.dangerLight,
+        marginLeft: 10
+    },
+    error:{
+        color: Colors.danger,
+        marginLeft: 10,
+        fontSize: 16
+    },
+    obrigatorios:{
+        color: Colors.danger
     },
     cadastrar:{
         alignItems: 'center',
@@ -79,6 +94,9 @@ const estilo = StyleSheet.create({
         fontSize: 15,
         marginRight: 5
     },
+    textInputData:{
+        color: Colors.secondaryLight
+    },
     check:{
         flex: 1,
         backgroundColor: Colors.ligth,
@@ -89,6 +107,9 @@ const estilo = StyleSheet.create({
         color: Colors.success,
         fontSize: 25,
         textAlign: 'center'
+    },
+    errorMensagem:{
+        color: Colors.danger
     },
     load:{
         width: '65%',
