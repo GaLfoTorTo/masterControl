@@ -79,6 +79,45 @@ const estilo = StyleSheet.create({
         justifyContent: 'space-between',
         marginVertical: 5,
         flexDirection: 'row'
+    },
+    moreInfoBotao: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center', 
+        padding: 10,
+        borderTopWidth:1,
+        borderTopColor: Colors.secondaryLight,
+    },
+    moreInfo: {
+        width: '100%',
+        paddingHorizontal: 5,
+        borderTopWidth: 1,
+        borderTopColor: Colors.secondaryLight,
+    },
+    moreDadosUser: {
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        padding: 3
+    },
+    textInfo:{
+        color: Colors.secondaryLight,
+        fontSize: 16,
+        alignSelf: 'center'
+    },
+    botaoSair:{
+        backgroundColor: Colors.danger,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'flex-end',
+        width: '20%',
+        padding: 7,
+        flexDirection: 'row',
+        borderRadius: 5
+    },
+    textIconSair: {
+        color: Colors.ligth,
+        fontSize: 16,
+        marginRight: 5
     }
 })
 

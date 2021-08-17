@@ -111,11 +111,17 @@ const estilo = StyleSheet.create({
     errorMensagem:{
         color: Colors.danger
     },
-    load:{
+    animation:{
         width: '65%',
         height: '65%',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    load: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
     }
 });
 

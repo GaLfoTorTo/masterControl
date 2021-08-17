@@ -8,7 +8,7 @@ const Logar = async (cpf, senha, platform) => {
             device_name: platform
         })
         .then(function (response) {
-            return response.data.user
+            return response.data
         })
         .catch(function (error) {
             return undefined

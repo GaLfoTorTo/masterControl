@@ -6,12 +6,15 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
-    Platform
+    Platform,
+    Modal,
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import RNPickerSelect from 'react-native-picker-select'
 import DateTimePicker, {event} from '@react-native-community/datetimepicker';
+import { TextInputMask } from 'react-native-masked-input';
 import {format } from 'date-fns';
 import {Formik, useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -24,8 +27,10 @@ const NovoPaciente = ({navigation}) => {
     const [mensagem, setMensagem] = useState('');
     const [data, setData] = useState(new Date());
     const [showData, setShowData] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const salvar = (values) => {
+        setLoading(true)
         values.data_nascimento = format(values.data_nascimento, 'dd/MM/yyyy')
         Cadastrar(setMensagem, 'pacientes',values);
     }
@@ -113,13 +118,24 @@ const NovoPaciente = ({navigation}) => {
                             routes: [{ name: 'Login' }]
                         })  
                     }}
-                    style={estilo.load}
+                    style={estilo.animation}
                 />
             </View>
         );
     }
     return (
         <SafeAreaView style={estilo.container}>
+            {loading == true &&
+                <Modal
+                    animationType='fade'
+                    visible={loading}
+                    transparent={true}
+                >
+                    <View style={estilo.load}>
+                        <ActivityIndicator size='large' color='white' />
+                    </View>
+                </Modal>
+            }
             <ScrollView
                 style={estilo.card}
                 showsVerticalScrollIndicator={false}
@@ -228,13 +244,18 @@ const NovoPaciente = ({navigation}) => {
                                 <Text style={estilo.obrigatorios}>*</Text>
                             </View>
                             {errors.telefone && touched.telefone && <Text style={estilo.error}>{errors.telefone}</Text>}
-                            <TextInput
+                            <TextInputMask
                                 style={estilo.input}
-                                keyboardType={"numeric"}
-                                textContentType={"telephoneNumber"}
-                                onChangeText={handleChange('telefone')}
-                                onBlur={handleBlur('telefone')}
+                                type={'cel-phone'}
+                                options={{
+                                    maskType: 'BRL',
+                                    withDDD: true,
+                                    dddMask: '(99) '
+                                }}
+                                keyboardType='numeric'
                                 value={values.telefone}
+                                onBlur={handleBlur('telefone')}
+                                onChangeText={handleChange('telefone')}
                             />
                         </View>
                         <View style={estilo.col}>
@@ -243,12 +264,12 @@ const NovoPaciente = ({navigation}) => {
                                 <Text style={estilo.obrigatorios}>*</Text>
                             </View>
                             {errors.cpf && touched.cpf && <Text style={estilo.error}>{errors.cpf}</Text>}
-                            <TextInput
-                                style={estilo.input}
-                                keyboardType={"numeric"}
-                                onChangeText={handleChange('cpf')}
-                                onBlur={handleBlur('cpf')}
+                            <TextInputMask                                style={estilo.input}
+                                type={'cpf'}
+                                keyboardType='numeric'
                                 value={values.cpf}
+                                onBlur={handleBlur('cpf')}
+                                onChangeText={handleChange('cpf')}
                             />
                         </View>
                     </View>
@@ -259,8 +280,12 @@ const NovoPaciente = ({navigation}) => {
                                 <Text style={estilo.obrigatorios}>*</Text>
                             </View>
                             {errors.rg && touched.rg && <Text style={estilo.error}>{errors.rg}</Text>}
-                            <TextInput
+                            <TextInputMask
                                 style={estilo.input}
+                                type={'custom'}
+                                options={{
+                                    mask: '9.999.999'
+                                }}
                                 keyboardType={"numeric"}
                                 onChangeText={handleChange('rg')}
                                 onBlur={handleBlur('rg')}
@@ -269,12 +294,13 @@ const NovoPaciente = ({navigation}) => {
                         </View>
                         <View style={estilo.col}>
                             <Text style={estilo.label}>CEP:</Text>
-                            <TextInput
+                            <TextInputMask
                                 style={estilo.input}
-                                keyboardType={"numeric"}
-                                onChangeText={handleChange('cep')}
-                                onBlur={handleBlur('cep')}
+                                type={'zip-code'}
+                                keyboardType='numeric'
                                 value={values.cep}
+                                onBlur={handleBlur('cep')}
+                                onChangeText={handleChange('cep')}
                             />
                         </View>
                     </View>

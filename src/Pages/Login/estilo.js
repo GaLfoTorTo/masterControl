@@ -89,7 +89,7 @@ const estilo = StyleSheet.create({
     load:{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
     }
 })

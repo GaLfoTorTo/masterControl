@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -8,13 +8,17 @@ import {
     SafeAreaView,
     TouchableOpacity
 } from 'react-native';
+import { AuthContext } from '../../Components/Context';
 import { RectButton } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import estilo from './estilo';
 
 const Home = ({navigation, route}) => {
 
-    const user = route.params;
-    console.warn(user);
+    const [ info, setInfo ] = useState(false);
+    const [user, setUser] = useState(null);
+    const {signOut} = useContext(AuthContext)
+    const 
     return (
         <SafeAreaView style={estilo.container}>
             <View style={estilo.header}>
@@ -32,11 +36,60 @@ const Home = ({navigation, route}) => {
                         <Text style={estilo.dado}>000.000.000-00</Text>
                     </View>
                     <View style={estilo.campo}>
-                        <Text style={estilo.label}>Protocólo:</Text>
-                        <Text style={estilo.dado}>15t34523532</Text>
+                        <Text style={estilo.label}>RG:</Text>
+                        <Text style={estilo.dado}>0.000.000</Text>
                     </View>
                 </View>
             </View>
+            <RectButton
+                onPress={() => setInfo(!info)}
+                style={estilo.moreInfoBotao}
+            >
+                <Text style={estilo.textInfo}>Mais Informações</Text>
+            </RectButton>
+            {info == true && 
+                <View style={estilo.moreInfo}>
+                    <View style={estilo.moreDadosUser}>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Data de nascimento:</Text>
+                            <Text style={estilo.dado}>00/00/0000</Text>
+                        </View>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>CEP:</Text>
+                            <Text style={estilo.dado}>00000-000</Text>
+                        </View>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Logradouro:</Text>
+                            <Text style={estilo.dado}>XXXXXXXXXXXX</Text>
+                        </View>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Número</Text>
+                            <Text style={estilo.dado}>0</Text>
+                        </View>
+                    </View>
+                    <View style={estilo.moreDadosUser}>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Bairro:</Text>
+                            <Text style={estilo.dado}>xxxxxxxxxxx</Text>
+                        </View>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Cidade:</Text>
+                            <Text style={estilo.dado}>xxxxxxxxxxx</Text>
+                        </View>
+                        <View style={estilo.campo}>
+                            <Text style={estilo.label}>Estado:</Text>
+                            <Text style={estilo.dado}>xx</Text>
+                        </View>
+                    </View>
+                    <RectButton 
+                        style={estilo.botaoSair}
+                        onPress={() => {signOut()}}
+                    >
+                        <Text style={estilo.textIconSair}>Sair</Text>
+                    <Icon name='sign-out-alt' size={20} color='white'/>
+                    </RectButton>
+                </View>
+            }
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={estilo.card}>
                     <Text style={estilo.tituloCard}>Meus Exames:</Text>

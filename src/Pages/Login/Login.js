@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     TextInput,
@@ -6,11 +6,15 @@ import {
     Text,
     Modal,
     Keyboard,
-    Platform
+    Platform,
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { TextInputMask } from 'react-native-masked-input';
+import {saveUser} from '../../Storage/Storage';
 import Logar from '../../Api/Logar';
 import estilo from './estilo';
+import { AuthContext } from '../../Components/Context';
 
 const Login = ({navigation}) => {
     const [open, setOpen] = useState(false);
@@ -20,6 +24,8 @@ const Login = ({navigation}) => {
     const [loading, setLoading] = useState(false);
     const plataforma = Platform.OS
 
+    const { signIn} = useContext(AuthContext);
+    
     const handleLogin = async () => {
         setLoading(true);
         if (cpf == '' || cpf == undefined || senha == '' || senha == undefined) {
@@ -28,7 +34,8 @@ const Login = ({navigation}) => {
             const resposta = await Logar(cpf, senha, plataforma);
             if (resposta != undefined ) {
                 setLoading(false)
-                navigation.replace('Home', resposta);
+                saveUser(resposta.user, resposta.token)
+                await signIn()
             } else{
                 setLoading(false);
                 setMessage('CPF ou Senha inválidos');
@@ -75,23 +82,24 @@ const Login = ({navigation}) => {
                     visible={loading}
                     transparent={true}
                 >
-                <View style={estilo.load}></View>
+                <View style={estilo.load}>
+                    <ActivityIndicator size='large' color='white'/>
+                </View>
                 </Modal>
             }
             <View style={[estilo.cardInputs, open == true && estilo.tecladoOpen]}>
-                <TextInput
-                    icon='mail'
+                <TextInputMask
                     style={estilo.input}
+                    type={'cpf'}
                     placeholder='CPF'
                     keyboardType='numeric'
-                    autoCapitalize='none'
                     returnKeyLabel='next'
                     returnKeyType='next'
+                    value={cpf}
                     onChangeText={text => setCpf(text)}
                     onSubmitEditing={Keyboard.dismiss}
                 />
                 <TextInput
-                    icon='key'
                     style={estilo.input}
                     placeholder='Senha'
                     secureTextEntry={true}
@@ -118,7 +126,7 @@ const Login = ({navigation}) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[estilo.botao2, estilo.botaoSenha]}
-                        onPress={() => { }}
+                        onPress={() => {getData()}}
                     >
                         <Icon name='key' size={20} color='white' />
                     </TouchableOpacity>
