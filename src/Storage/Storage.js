@@ -14,8 +14,8 @@ export async function getUser(){
     try{
         const masterControlUser = await AsyncStorage.getItem('@masterControl:user')
         const masterControlToken = await AsyncStorage.getItem('@masterControl:token')
-        const user = masterControlUser != null ? JSON.parse(masterControlUser) : {};
-        const  token = masterControlToken != null ? JSON.parse(masterControlToken) : {};
+        const user = masterControlUser != null ? JSON.parse(masterControlUser) : null;
+        const  token = masterControlToken != null ? JSON.parse(masterControlToken) : null;
         return {user, token}
     }catch(e){
         console.log(e)

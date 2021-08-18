@@ -12,13 +12,25 @@ import { AuthContext } from '../../Components/Context';
 import { RectButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import estilo from './estilo';
+import { getUser } from '../../Storage/Storage';
 
-const Home = ({navigation, route}) => {
+const Home = ({navigation}) => {
 
-    const [ info, setInfo ] = useState(false);
-    const [user, setUser] = useState(null);
-    const {signOut} = useContext(AuthContext)
-    const 
+    const [info, setInfo] = useState(false);
+    const [user, setUser] = useState();
+    const [token, setToken] = useState();
+    const {signOut} = useContext(AuthContext);
+    
+    useEffect(() => {
+        const dataUser = async () => {
+            const data = await getUser()
+            setUser(data.user)
+            setToken(data.token)
+            return data
+        }
+        dataUser()
+    },[])
+
     return (
         <SafeAreaView style={estilo.container}>
             <View style={estilo.header}>
@@ -29,15 +41,15 @@ const Home = ({navigation, route}) => {
                 <View style={estilo.dadosUser}>
                     <View style={estilo.campo}>
                         <Text style={estilo.label}>Nome:</Text>
-                        <Text style={estilo.dado}>Individuo</Text>
+                        <Text style={estilo.dado}>{user != null && user.nome}</Text>
                     </View>
                     <View style={estilo.campo}>
                         <Text style={estilo.label}>CPF:</Text>
-                        <Text style={estilo.dado}>000.000.000-00</Text>
+                        <Text style={estilo.dado}>{user != null && user.cpf}</Text>
                     </View>
                     <View style={estilo.campo}>
                         <Text style={estilo.label}>RG:</Text>
-                        <Text style={estilo.dado}>0.000.000</Text>
+                        <Text style={estilo.dado}>{user != null && user.rg}</Text>
                     </View>
                 </View>
             </View>
@@ -49,36 +61,36 @@ const Home = ({navigation, route}) => {
             </RectButton>
             {info == true && 
                 <View style={estilo.moreInfo}>
-                    <View style={estilo.moreDadosUser}>
+                    <View style={estilo.moreDadosuser != null && User}>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Data de nascimento:</Text>
-                            <Text style={estilo.dado}>00/00/0000</Text>
+                            <Text style={estilo.dado}>{user != null && user.data_nascimento}</Text>
                         </View>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>CEP:</Text>
-                            <Text style={estilo.dado}>00000-000</Text>
+                        <Text style={estilo.dado}>{user != null && user.cep}</Text>
                         </View>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Logradouro:</Text>
-                            <Text style={estilo.dado}>XXXXXXXXXXXX</Text>
+                            <Text style={estilo.dado}>{user != null && user.logradouro}</Text>
                         </View>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Número</Text>
-                            <Text style={estilo.dado}>0</Text>
+                            <Text style={estilo.dado}>{user != null && user.numero}</Text>
                         </View>
                     </View>
-                    <View style={estilo.moreDadosUser}>
+                    <View style={estilo.moreDadosuser != null && User}>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Bairro:</Text>
-                            <Text style={estilo.dado}>xxxxxxxxxxx</Text>
+                            <Text style={estilo.dado}>{user != null && user.bairro}</Text>
                         </View>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Cidade:</Text>
-                            <Text style={estilo.dado}>xxxxxxxxxxx</Text>
+                            <Text style={estilo.dado}>{user != null && user.cidade}</Text>
                         </View>
                         <View style={estilo.campo}>
                             <Text style={estilo.label}>Estado:</Text>
-                            <Text style={estilo.dado}>xx</Text>
+                            <Text style={estilo.dado}>{user != null && user.uf}</Text>
                         </View>
                     </View>
                     <RectButton 

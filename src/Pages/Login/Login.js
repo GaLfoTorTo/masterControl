@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TextInputMask } from 'react-native-masked-input';
-import {saveUser} from '../../Storage/Storage';
+import {getUser, saveUser} from '../../Storage/Storage';
 import Logar from '../../Api/Logar';
 import estilo from './estilo';
 import { AuthContext } from '../../Components/Context';
@@ -33,9 +33,9 @@ const Login = ({navigation}) => {
         } else {
             const resposta = await Logar(cpf, senha, plataforma);
             if (resposta != undefined ) {
-                setLoading(false)
                 saveUser(resposta.user, resposta.token)
                 await signIn()
+                setLoading(false)
             } else{
                 setLoading(false);
                 setMessage('CPF ou Senha inválidos');
@@ -126,7 +126,7 @@ const Login = ({navigation}) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[estilo.botao2, estilo.botaoSenha]}
-                        onPress={() => {getData()}}
+                        onPress={() => {teste()}}
                     >
                         <Icon name='key' size={20} color='white' />
                     </TouchableOpacity>

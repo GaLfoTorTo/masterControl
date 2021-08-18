@@ -37,64 +37,67 @@ const StackRoutes = ({ navigation }) => {
         signIn: () =>{
             const user = async () => {
                 const data = await getUser()
-                return data != null && data;
+                dispatch({type: 'LOGAR', user: data.user})
+                //return data;
             }
-            dispatch({type: 'LOGAR', user: user()})
+            user()
         },
         signOut: () => {
             const remove = async () =>{
                 const data = await removeUser()
-                return data;
+                dispatch({ type: 'LOGOUT' })
+                //return data;
             }
-            dispatch({ type: 'LOGOUT', user: remove() })
-        }
+            remove()
+        },
     }))
 
     useEffect(() => {
         const user = async () => {
-            await getUser();
+            const data = await getUser();
+            dispatch({ type: 'LOGAR', user: data.user })
         }
-        dispatch({ type: 'LOGAR', user: user() })
+        user()
     },[])
-    
+
     return (
         <AuthContext.Provider value={state}>
             <NavigationContainer>
                 {loginState.user == null ? (
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name='Login'
-                        component={Login}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name='NovoPaciente'
-                        component={NovoPaciente}
-                        options={{
-                            title: false
-                        }}
-                    />
-                </Stack.Navigator>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name='Login'
+                            component={Login}
+                            options={{
+                                headerShown: false
+                            }}
+                        />
+                        <Stack.Screen
+                            name='NovoPaciente'
+                            component={NovoPaciente}
+                            options={{
+                                title: false
+                            }}
+                        />
+                    </Stack.Navigator>
                 ): (
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name='Home'
-                        component={TabRoutes}
-                        options={{
-                            title: false
-                        }}
-                    />
-                    <Stack.Screen
-                        name='Novo'
-                        component={Novo}
-                    />
-                    <Stack.Screen
-                        name='Visualizar'
-                        component={Visualizar}
-                    />
-                </Stack.Navigator>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name='Home'
+                            component={TabRoutes}
+                            options={{
+                                title: false
+                            }}
+                        />
+                        <Stack.Screen
+                            name='Novo'
+                            component={Novo}
+                        />
+                        <Stack.Screen
+                            name='Visualizar'
+                            component={Visualizar}
+                        />
+                    </Stack.Navigator>
                 )}
             </NavigationContainer>
         </AuthContext.Provider>

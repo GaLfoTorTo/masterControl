@@ -90,7 +90,7 @@ const estilo = StyleSheet.create({
     },
     moreInfo: {
         width: '100%',
-        paddingHorizontal: 5,
+        padding: 5,
         borderTopWidth: 1,
         borderTopColor: Colors.secondaryLight,
     },
